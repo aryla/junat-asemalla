@@ -1,0 +1,23 @@
+.Tabs-bar {
+  padding: 50px 0 0;
+}
+
+.Tabs-button, .Tabs-button-selected {
+  border-color: gray;
+  border-width: 1px;
+  display: inline;
+  padding: 10px 20px;
+  margin: 0;
+}
+
+.Tabs-button {
+  color: #56A319;
+  border-style: none none solid;
+  border-radius: 0;
+}
+
+.Tabs-button-selected {
+  color: #656565;
+  border-style: solid solid none;
+  border-radius: 5px 5px 0 0;
+}

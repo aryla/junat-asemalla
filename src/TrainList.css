@@ -1,0 +1,35 @@
+.TrainList {
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: #656565;
+}
+
+.TrainList > tr {
+  height: 50px;
+  border-bottom: 1px gray;
+}
+
+.TrainList > tr:nth-child(2n) {
+  background-color: #fafafa;
+}
+
+.TrainList > tr:nth-child(2n+1) {
+  background-color: #fff;
+}
+
+.TrainList > tr > th {
+  color: #bebebe;
+  font-size: 0.8em;
+  vertical-align: bottom;
+  text-align: left;
+  width: 200px;
+  padding: 10px 20px;
+}
+
+.TrainList > tr > td {
+  padding: 20px;
+}
+
+.TrainList > tr > td, .TrainList > tr > th {
+  border-bottom: 1px solid #ddd;
+}
