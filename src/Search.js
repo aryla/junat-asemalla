@@ -5,6 +5,7 @@ import SearchInput from './SearchInput';
 import Stations from './Stations';
 import Tab from './Tab';
 import Tabs from './Tabs';
+import Train from './Train';
 import TrainList from './TrainList';
 
 class Search extends Component {
@@ -47,12 +48,24 @@ class Search extends Component {
       });
 
       this.rata.getArrivals(code).then((trains) => {
+        trains = trains.sort((a, b) => {
+          const trainA = new Train(a);
+          const trainB = new Train(b);
+          return new Date(trainA.getTimeOfArrivalAt(code).scheduled).getTime() -
+                 new Date(trainB.getTimeOfArrivalAt(code).scheduled).getTime();
+        });
         this.setState({
           arrivals: trains,
         });
       });
 
       this.rata.getDepartures(code).then((trains) => {
+        trains = trains.sort((a, b) => {
+          const trainA = new Train(a);
+          const trainB = new Train(b);
+          return new Date(trainA.getTimeOfDepartureFrom(code).scheduled).getTime() -
+                 new Date(trainB.getTimeOfDepartureFrom(code).scheduled).getTime();
+        });
         this.setState({
           departures: trains,
         });
