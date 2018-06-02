@@ -28,6 +28,21 @@ class TrainList extends Component {
                 time = train.getTimeOfDepartureFrom(this.props.station);
               }
 
+              const renderTime = (time) => {
+                const date = new Date(time);
+                const currentDate = new Date();
+
+                return (
+                  <time title={date.toLocaleString()}>
+                    {
+                      currentDate.getDate() !== date.getDate()
+                        ? date.toLocaleString()
+                        : date.toLocaleTimeString()
+                    }
+                  </time>
+                );
+              };
+
               return (
                 <tr key={index} className={train.isCancelled() ? 'TrainList-cancelled' : ''}>
                   <td>{train.getTrainName()}</td>
@@ -37,17 +52,17 @@ class TrainList extends Component {
                     if (train.isCancelled()) {
                       return (
                         <div>
-                          <div>{time.scheduled}</div>
+                          <div>{renderTime(time.scheduled)}</div>
                           <div className="TrainList-late">Cancelled</div>
                         </div>
                       );
                     } else if (time.actual === time.scheduled) {
-                      return <div>{time.scheduled}</div>;
+                      return <div>{renderTime(time.scheduled)}</div>;
                     } else {
                       return (
                         <div>
-                          <div className="TrainList-late">{time.actual}</div>
-                          <div>({time.scheduled})</div>
+                          <div className="TrainList-late">{renderTime(time.actual)}</div>
+                          <div>({renderTime(time.scheduled)})</div>
                         </div>
                       );
                     }
