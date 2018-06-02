@@ -5,8 +5,12 @@
 }
 
 .TrainList > tr {
-  height: 50px;
+  height: 60px;
   border-bottom: 1px gray;
+}
+
+tr.TrainList-cancelled {
+  color: #bebebe;
 }
 
 .TrainList > tr:nth-child(2n) {
@@ -27,9 +31,13 @@
 }
 
 .TrainList > tr > td {
-  padding: 20px;
+  padding: 0 20px;
 }
 
 .TrainList > tr > td, .TrainList > tr > th {
   border-bottom: 1px solid #ddd;
+}
+
+div.TrainList-late {
+  color: #f00;
 }

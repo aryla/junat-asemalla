@@ -28,14 +28,30 @@ class TrainList extends Component {
                 time = train.getTimeOfDepartureFrom(this.props.station);
               }
 
-              const estimateTime  = time.actual || time.scheduled;
-
               return (
-                <tr key={index}>
+                <tr key={index} className={train.isCancelled() ? 'TrainList-cancelled' : ''}>
                   <td>{train.getTrainName()}</td>
                   <td>{this.props.stations.getStationName(train.getFirstStationCode())}</td>
                   <td>{this.props.stations.getStationName(train.getLastStationCode())}</td>
-                  <td>{estimateTime}</td>
+                  <td>{(() => {
+                    if (train.isCancelled()) {
+                      return (
+                        <div>
+                          <div>{time.scheduled}</div>
+                          <div className="TrainList-late">Cancelled</div>
+                        </div>
+                      );
+                    } else if (time.actual === time.scheduled) {
+                      return <div>{time.scheduled}</div>;
+                    } else {
+                      return (
+                        <div>
+                          <div className="TrainList-late">{time.actual}</div>
+                          <div>({time.scheduled})</div>
+                        </div>
+                      );
+                    }
+                  })()}</td>
                 </tr>
               );
             })

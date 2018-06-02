@@ -26,11 +26,16 @@ class Train {
       const row = this.data.timeTableRows[i];
       if (row.stationShortCode === stationCode && row.type === type) {
         return {
-          actual:    row.actualTime || row.liveEstimateTime,
+          actual:    row.actualTime || row.liveEstimateTime || row.scheduledTime,
           scheduled: row.scheduledTime,
         };
       }
     }
+
+    return {
+      actual: undefined,
+      scheduled: undefined,
+    };
   }
 
   getTimeOfArrivalAt(stationCode) {
