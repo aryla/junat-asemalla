@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './TrainList.css';
+import Train from './Train';
 
 class TrainList extends Component {
   render() {
@@ -16,30 +17,29 @@ class TrainList extends Component {
           </tr>
         </thead>
         <tbody className="TrainList">
-          <tr>
-            <td>S 165</td>
-            <td>Helsinki</td>
-            <td>Tampere</td>
-            <td><time>10:40</time></td>
-          </tr>
-          <tr>
-            <td>IC 20</td>
-            <td>Oulu</td>
-            <td>Helsinki</td>
-            <td><time>10:00</time></td>
-          </tr>
-          <tr>
-            <td>P 635</td>
-            <td>Helsinki</td>
-            <td>Jyväskylä</td>
-            <td><time>10:24</time></td>
-          </tr>
-          <tr>
-            <td>Commuter train R</td>
-            <td>Helsinki</td>
-            <td>Tampere</td>
-            <td><time>10:25</time></td>
-          </tr>
+          {
+            this.props.trains.map((trainData, index) => {
+              const train = new Train(trainData);
+
+              let time;
+              if (this.props.type === 'arrivals') {
+                time = train.getTimeOfArrivalAt(this.props.station);
+              } else {
+                time = train.getTimeOfDepartureFrom(this.props.station);
+              }
+
+              const estimateTime  = time.actual || time.scheduled;
+
+              return (
+                <tr key={index}>
+                  <td>{train.getTrainName()}</td>
+                  <td>{this.props.stations.getStationName(train.getFirstStationCode())}</td>
+                  <td>{this.props.stations.getStationName(train.getLastStationCode())}</td>
+                  <td>{estimateTime}</td>
+                </tr>
+              );
+            })
+          }
         </tbody>
       </table>
     );
