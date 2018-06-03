@@ -78,7 +78,8 @@ class Search extends Component {
     return (
       <div className="Search">
         <SearchInput defaultValue={this.defaultStation}
-                     onSearch={this.doSearch.bind(this)} />
+                     onSearch={this.doSearch.bind(this)}
+                     stations={this.state.stations} />
         <Tabs>
           <Tab title="Saapuvat">
             <TrainList type="arrivals"

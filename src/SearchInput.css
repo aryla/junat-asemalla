@@ -1,14 +1,42 @@
+.SearchInput-text {
+  color: #656565;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.SearchInput-field {
+  width: 400px;
+  position: relative;
+}
+
 .SearchInput-input {
   background-color: #eef3ee;
-  width: 400px;
+  width: 100%;
   height: 40px;
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 20px;
 }
 
-.SearchInput-text {
-  color: #656565;
-  font-weight: bold;
-  padding: 10px 0;
+.SearchInput-suggestions {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 398px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  z-index: 1;
+}
+
+.SearchInput-suggestion {
+  padding: 0 20px;
+}
+
+.SearchInput-suggestion:hover {
+  background-color: #656565;
+  color: #fff;
 }

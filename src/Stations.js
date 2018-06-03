@@ -19,6 +19,21 @@ class Stations {
   getStationName(stationCode) {
     return this.codeToName[stationCode];
   }
+
+  getMatchingStations(stationNamePrefix, maxResults) {
+    // TODO: Could use a trie structure for better performance.
+
+    const names = Object.keys(this.nameToCode);
+
+    let result = [];
+    for (let i = 0; i < names.length && result.length < maxResults; i++) {
+      if (names[i].startsWith(stationNamePrefix)) {
+        result.push(names[i]);
+      }
+    }
+
+    return result;
+  }
 }
 
 export default Stations;
