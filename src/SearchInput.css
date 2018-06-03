@@ -18,6 +18,10 @@
   padding: 20px;
 }
 
+.SearchInput-invisible {
+  visibility: hidden;
+}
+
 .SearchInput-suggestions {
   background-color: #fff;
   border: 1px solid #ddd;

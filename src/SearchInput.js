@@ -9,6 +9,7 @@ class SearchInput extends Component {
 
     this.state = {
       suggestions: [],
+      showSuggestions: false,
     };
   }
 
@@ -17,12 +18,10 @@ class SearchInput extends Component {
     const stationCode = this.props.stations.getStationCode(stationName);
     if (stationCode !== undefined) {
       this.props.onSearch(this.inputRef.current.value);
-      this.setState({
-        suggestions: [],
-      });
     } else {
       this.setState({
         suggestions: this.props.stations.getMatchingStations(stationName, 10),
+        showSuggestions: true,
       });
     }
   }
@@ -30,6 +29,19 @@ class SearchInput extends Component {
   onSuggestionSelected(stationName) {
     this.inputRef.current.value = stationName;
     this.onInputChange();
+    this.setState({
+      showSuggestions: false,
+    });
+  }
+
+  onBlur() {
+    // Set a timeout for hiding the suggestion list so that it's not hidden
+    // before the onclick handler runs when the user clicks a suggestion.
+    window.setTimeout(() => {
+      this.setState({
+        showSuggestions: false,
+      });
+    }, 200);
   }
 
   render() {
@@ -42,8 +54,12 @@ class SearchInput extends Component {
                  defaultValue={this.props.defaultValue}
                  placeholder={this.props.defaultValue}
                  ref={this.inputRef}
-                 onChange={this.onInputChange.bind(this)} />
-          <ul className="SearchInput-suggestions">
+                 onChange={this.onInputChange.bind(this)}
+                 onFocus={this.onInputChange.bind(this)}
+                 onBlur={this.onBlur.bind(this)} />
+          <ul className={this.state.showSuggestions
+                          ? 'SearchInput-suggestions'
+                          : 'SearchInput-suggestions SearchInput-invisible'}>
             {
               this.state.suggestions.map((stationName, index) => (
                 <li key={index}
