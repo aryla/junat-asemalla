@@ -1,0 +1,14 @@
+.SearchInput-input {
+  background-color: #eef3ee;
+  width: 400px;
+  height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.SearchInput-text {
+  color: #656565;
+  font-weight: bold;
+  padding: 10px 0;
+}

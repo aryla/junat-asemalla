@@ -12,6 +12,8 @@ class Search extends Component {
   constructor(props) {
     super(props);
 
+    this.defaultStation = 'Tampere asema';
+
     this.inputRef = React.createRef();
 
     this.rata = new Rata();
@@ -33,12 +35,11 @@ class Search extends Component {
         stations: stations,
       });
     });
-    this.doSearch();
+
+    this.doSearch(this.defaultStation);
   }
 
-  doSearch() {
-    const stationName = this.inputRef.current.value;
-
+  doSearch(stationName) {
     this.getStations.then((stations) => {
       const code = this.state.stations.getStationCode(stationName);
       if (!code) return;
@@ -76,15 +77,8 @@ class Search extends Component {
   render() {
     return (
       <div className="Search">
-        <div className="Search-box">
-          <div className="Search-text">Hae aseman nimellä</div>
-          <input type="search"
-                 className="Search-input"
-                 defaultValue="Tampere asema"
-                 placeholder="Tampere asema"
-                 ref={this.inputRef}
-                 onChange={this.doSearch.bind(this)} />
-        </div>
+        <SearchInput defaultValue={this.defaultStation}
+                     onSearch={this.doSearch.bind(this)} />
         <Tabs>
           <Tab title="Saapuvat">
             <TrainList type="arrivals"
