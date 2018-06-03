@@ -16,7 +16,12 @@ class SearchInput extends Component {
   onInputChange() {
     const stationName = this.inputRef.current.value;
     const stationCode = this.props.stations.getStationCode(stationName);
-    if (stationCode !== undefined) {
+    if (stationName === '') {
+      this.setState({
+        suggestions: [],
+        showSuggestions: false,
+      });
+    } else if (stationCode !== undefined) {
       this.props.onSearch(this.inputRef.current.value);
     } else {
       this.setState({
@@ -44,6 +49,14 @@ class SearchInput extends Component {
     }, 200);
   }
 
+  onClearInput() {
+    this.inputRef.current.value = '';
+    this.setState({
+      suggestions: [],
+      showSuggestions: false,
+    });
+  }
+
   render() {
     return (
       <div className="SearchInput-container">
@@ -52,11 +65,14 @@ class SearchInput extends Component {
           <input type="search"
                  className="SearchInput-input"
                  defaultValue={this.props.defaultValue}
-                 placeholder={this.props.defaultValue}
                  ref={this.inputRef}
                  onChange={this.onInputChange.bind(this)}
                  onFocus={this.onInputChange.bind(this)}
                  onBlur={this.onBlur.bind(this)} />
+          <input type="button"
+                 className="SearchInput-clear"
+                 value="&times;"
+                 onClick={this.onClearInput.bind(this)} />
           <ul className={this.state.showSuggestions
                           ? 'SearchInput-suggestions'
                           : 'SearchInput-suggestions SearchInput-invisible'}>

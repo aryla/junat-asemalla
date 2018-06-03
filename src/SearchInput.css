@@ -5,17 +5,53 @@
 }
 
 .SearchInput-field {
-  width: 400px;
   position: relative;
 }
 
 .SearchInput-input {
+  display: inline;
   background-color: #eef3ee;
-  width: 100%;
+  width: 400px;
   height: 40px;
   border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 20px;
+  border-radius: 5px 0 0 5px;
+  border-right: none;
+  margin: 0;
+  padding: 0 20px;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+.SearchInput-clear {
+  display: inline;
+  color: #656565;
+  background-color: #eef3ee;
+  font-size: 20px;
+  text-align: center;
+  vertical-align: middle;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 0 5px 5px 0;
+  border-left: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.SearchInput-clear:hover {
+  color: #000;
+  background-color: #fafafa;
+  border: 2px outset #ddd;
+}
+
+.SearchInput-clear:active {
+  color: #000;
+  background-color: #eef3ee;
+  border: 2px inset #ddd;
 }
 
 .SearchInput-invisible {
@@ -26,7 +62,7 @@
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;
-  width: 398px;
+  width: 440px;
   margin: 0;
   padding: 0;
   list-style-type: none;
@@ -34,6 +70,7 @@
   top: 40px;
   left: 0;
   z-index: 1;
+  box-sizing: border-box;
 }
 
 .SearchInput-suggestion {
